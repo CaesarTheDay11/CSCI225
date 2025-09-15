@@ -2,24 +2,37 @@
 <html lang="en">
 <head>
     <title> Assignment2, ContactME </title>
+    <meta charset="UTF-8">
 </head>
 <body>
 
 <div class="video">
-    <iframe width="560" height="315" src="video/" title="Presentation" frameborder="0" allowfullscreen></iframe>
+    <h1>Niagra Falls!</h1>
+    <iframe width="560" height="315" src="video/20231226_095043.mp4" title="Niagra Falls" frameborder="0" allowfullscreen></iframe>
 </div>
 <div id="practice">
 		<!-- september 8th -->
 			<form action="" name="feedback">
 				<p><b>Login Form:</b></p>
-				First Name: <input type="text" name="fname" placeholder="anonymous" required>
-                Last Name: <input type="text" name="lname" placeholder="anonymous" required>
-				Email: <input type="email" name="mail" placeholder="name@domain.com" required>
-				<p> Recommend this site:</p>
-                <input id="yes" type="radio" name="Recommend" value="yes"> Yes
-				<input id="no" type="radio" name="Recommend" value="no"> No
+				<label>First Name: <input type="text" name="fname" placeholder="anonymous" required></label>
+                <br>
+                <br>
+                <label>Last Name: <input type="text" name="lname" placeholder="anonymous" required></label>
+                <br>
+                <br>
+                <label>Email: <input type="email" name="mail" placeholder="name@domain.com" required></label>
+				<br>
+                <br>
+                <label>Password: <input type="password" name="pwd" placeholder="password" required></label>
+                <br>
+                <br>
+                <label>Age: <input type="number" name="age" min="1" max="120" placeholder="18" required></label>
+                <p> Recommend this site:</p>
+                <label><input id="yes" type="radio" name="Recommend" value="yes"> Yes </label>
+				<label><input id="no" type="radio" name="Recommend" value="no"> No</label>
 			<br>
-				<label> <input name="Remember" type="checkbox" name="remember" value="Remember"> Remember me</label>
+            <br>
+				<label> <input name="email_copy" type="checkbox" value="Yes"> Send me a copy of this form</label>
 				<label> <input name="donate" type="checkbox" checked value="Donate"> Donate $50</label>
 			<br>
             <p>Select your favorite Website:</p>
@@ -27,10 +40,35 @@
                 <option value="Google">Google</option> 
                 <option value="Facebook">Facebook</option> 
                 <option value="Twitter">Twitter</option> 
+                <option value="Time">Time</option>
+                <option value="YouTube">YouTube</option> 
+                <option value="Instagram">Instagram</option>
             </select>
-				
 			<br>
+            <br>
+            <label for="myFile">Upload a file:</label>
+            <br>
+            <br>
+            <input type="file" id="myFile" name="filename">
+            <br>
+            <br>
+            <label for="rating">Rate this site (1-10):</label>
+            <br>
+            <br>
+            <input type="range" id="rating" name="rating" min="1" max="10">
+            <br>
+            <br>
+            <label for="comments">Comments:</label>
+            <br>
+            <textarea name="comments" rows="5" cols="40" placeholder="Enter your comments here..."></textarea>
+            <br>
+            <br>
+            <label>Birthday: <br><input type="date" name="bday" required></label>
 			<br>
+            <br> 
+            <label>Color: <input type="color" name="color" required></label>
+            <br>
+            <br>
 				<input type="submit" value="Submit">
 				<input type="reset" value="Reset">				
 			</form>
