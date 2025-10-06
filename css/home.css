@@ -44,7 +44,7 @@
 .introduction{
     position: absolute;
     float: left;
-    width: var(--page-width);
+    width: 38%;
     top: var(--page-top);
     color: var(--color-bottom-bar-text);
     z-index: 0;    
@@ -70,19 +70,11 @@
     background-color: var(--color-body-bg);
     font-size: large;
 }
-.navbar ul {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    margin: 5px 0;
-    padding: 0 20px;
-    width: 100%;
+.navbar ul li {
+    display: inline-block;
+    margin-right: 3%;
+    
 }
-.navbar li {
-    margin-right: 30px;
-    display: inline;
-}
-/* Hide all sections by default */
 .introduction-title, 
 .portfolio-title,
 .assignment-title,
@@ -298,5 +290,5 @@ p:hover {
     padding: 10px;
     color: var(--color-page1-text);
     position: absolute;
-    top: 25px;
+    top: 5%;
 }
