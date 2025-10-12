@@ -7,25 +7,33 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- add this -->
-    <style type ="text/css">
+    <style type="text/css">
+        /* ...existing code... */
         .container-xxl {
             background-color: #eff3f7;
             border: 2px solid #1c3d54;
+            padding: 1rem;
+            /* prevent white content from touching the blue edge */
+            box-sizing: border-box;
         }
-        body{
+        /* ...existing code... */
+        body {
             background-color: #66b5f5;
         }
+
         .navbar {
             background-color: #1c3d54;
             color: hsl(210, 100%, 95%);
             padding: 10px;
             margin-bottom: 20px;
         }
+
         .navbar a {
             color: hsl(210, 100%, 95%);
             text-decoration: underline;
             padding: 8px 16px;
         }
+
         iframe {
             border: 2px solid #9a2121;
             border-radius: 8px;
@@ -57,11 +65,14 @@
         </div>
         <div class="row ">
             <div class="col-12 col-md-6 order-1 order-md-1">
+                <!-- ...existing code... -->
                 <div class="video margin img-fluid py-1" id="assignment">
-                    <h1>Niagra Falls!</h1>
-                    <iframe width="560" height="315" src="Video/20231226_095043.mp4" title="Niagra Falls"
-                        frameborder="0" allowfullscreen></iframe>
+                    <h1>Niagara Falls!</h1>
+                    <div class="ratio ratio-16x9">
+                        <iframe src="Video/20231226_095043.mp4" title="Niagara Falls" allowfullscreen></iframe>
+                    </div>
                 </div>
+                <!-- ...existing code... -->
             </div>
             <div class="col-12 col-md-6 order-2 order-md-2">
                 <div id="practice" class="py-2 rounded p-3">
@@ -69,36 +80,45 @@
                     <form action="" name="feedback">
                         <p><b>Feedback:</b></p>
                         <div class="form-floating shadow-sm">
-                            <input type="text" name="fname" placeholder="anonymous" class="form-control" id="floatingInput" required>
-                            <small id="firstNameHelp" class="form-text text-muted">Your first name as you would like us to address you.</small>
+                            <input type="text" name="fname" placeholder="anonymous" class="form-control"
+                                id="floatingInput" required>
+                            <small id="firstNameHelp" class="form-text text-muted">Your first name as you would like us
+                                to address you.</small>
                             <label for="floatingInput">First Name:</label>
                         </div>
                         <br>
                         <br>
                         <div class="form-floating">
-                            <input type="text" name="lname" placeholder="anonymous" class="form-control" id="floatingInputLast" required>
-                            <small id="lastNameHelp" class="form-text text-muted">Your last name as you would like us to address you.</small>
+                            <input type="text" name="lname" placeholder="anonymous" class="form-control"
+                                id="floatingInputLast" required>
+                            <small id="lastNameHelp" class="form-text text-muted">Your last name as you would like us to
+                                address you.</small>
                             <label for="floatingInputLast">Last Name:</label>
                         </div>
                         <br>
                         <br>
-                        
+
                         <div class="form-floating">
-                            <input type="email" name="mail" placeholder="name@domain.com" class="form-control" id="floatingInputEmail" required>
-                            <small id="emailHelp" class="form-text text-muted">Your email — we’ll never share it.</small>
+                            <input type="email" name="mail" placeholder="name@domain.com" class="form-control"
+                                id="floatingInputEmail" required>
+                            <small id="emailHelp" class="form-text text-muted">Your email — we’ll never share
+                                it.</small>
                             <label for="floatingInputEmail">Email:</label>
                         </div>
                         <br>
                         <br>
                         <div class="form-floating">
-                            <input type="password" name="pwd" placeholder="password" class="form-control" id="floatingInputPassword" required>
-                            <small id="passwordHelp" class="form-text text-muted">Your password must be 8-20 characters long.</small>
+                            <input type="password" name="pwd" placeholder="password" class="form-control"
+                                id="floatingInputPassword" required>
+                            <small id="passwordHelp" class="form-text text-muted">Your password must be 8-20 characters
+                                long.</small>
                             <label for="floatingInputPassword">Password:</label>
                         </div>
                         <br>
                         <br>
                         <div class="form-floating">
-                            <input type="number" name="age" min="1" max="120" placeholder="18" class="form-control" id="floatingInputAge" required>
+                            <input type="number" name="age" min="1" max="120" placeholder="18" class="form-control"
+                                id="floatingInputAge" required>
                             <small id="ageHelp" class="form-text text-muted">Your age in years.</small>
                             <label for="floatingInputAge">Age:</label>
                         </div>
@@ -108,19 +128,19 @@
                             <label class="form-check-label">Would you recommend this site?</label>
                             <br>
                             <div class="form-check-inline">
-                            <input id="yes" type="radio" class="form-check-input" name="Recommend" value="yes">
-                            <label for="yes" class="form-check-label">Yes</label>
-                            <input id="no" type="radio" class="form-check-input" name="Recommend" value="no">
-                            <label for="no" class="form-check-label">No</label>
-                        </div>
-                        
+                                <input id="yes" type="radio" class="form-check-input" name="Recommend" value="yes">
+                                <label for="yes" class="form-check-label">Yes</label>
+                                <input id="no" type="radio" class="form-check-input" name="Recommend" value="no">
+                                <label for="no" class="form-check-label">No</label>
+                            </div>
                         </div>
                         <br>
                         <br>
                         <div class="form-check-inline">
-                            <input name="donate" class="form-check-input" type="checkbox" id="25" value="Donate25"> 
+                            <input name="donate" class="form-check-input" type="checkbox" id="25" value="Donate25">
                             <label for="25" class="form-check-label">Donate $25</label>
-                            <input name="donate" class="form-check-input" type="checkbox" id="50" checked value="Donate50"> 
+                            <input name="donate" class="form-check-input" type="checkbox" id="50" checked
+                                value="Donate50">
                             <label for="50" class="form-check-label">Donate $50</label>
                         </div>
                         <br>
@@ -136,47 +156,50 @@
                         </select>
                         <br>
                         <br>
-                        <div class ="form-control-file">
-                        <label for="myFile">Upload a file:</label>
-                        <input type="file" id="myFile" class="form-control" name="filename">
-                        <small id="fileHelp" class="form-text text-muted">Upload a relevant file if necessary.</small>
+                        <div class="form-control-file">
+                            <label for="myFile">Upload a file:</label>
+                            <input type="file" id="myFile" class="form-control" name="filename">
+                            <small id="fileHelp" class="form-text text-muted">Upload a relevant file if
+                                necessary.</small>
                         </div>
                         <br>
                         <br>
-                        <div class ="form-control-range">                        
-                        <label for="rating">Rate this site (1-10):</label>
-                        <input type="range" class="form-range" id="rating" name="rating" min="1" max="10">
-                        <small id="ratingHelp" class="form-text text-muted">1 = worst, 10 = best</small>
+                        <div class="form-control-range">
+                            <label for="rating">Rate this site (1-10):</label>
+                            <input type="range" class="form-range" id="rating" name="rating" min="1" max="10">
+                            <small id="ratingHelp" class="form-text text-muted">1 = worst, 10 = best</small>
                         </div>
                         <br>
                         <br>
                         <div class="form-control-textarea">
-                        <label for="comments">Comments:</label>
-                        <br>
-                        <textarea id="comments" name="comments" rows="5" cols="40"
-                            placeholder="Enter your comments here..." class="form-control"></textarea>
-                        <small id="commentsHelp" class="form-text text-muted">Please provide any further comments in this section.</small>
+                            <label for="comments">Comments:</label>
+                            <br>
+                            <textarea id="comments" name="comments" rows="5" cols="40"
+                                placeholder="Enter your comments here..." class="form-control"></textarea>
+                            <small id="commentsHelp" class="form-text text-muted">Please provide any further comments in
+                                this section.</small>
                         </div>
                         <br>
                         <br>
                         <div class="form-control-date">
-                        <label for="bday">Birthday: </label>
-                        <input type="date" name="bday" id="bday" class="form-control" required>
-                        <small id="bdayHelp" class="form-text text-muted">Please enter your birthday.</small>
+                            <label for="bday">Birthday: </label>
+                            <input type="date" name="bday" id="bday" class="form-control" required>
+                            <small id="bdayHelp" class="form-text text-muted">Please enter your birthday.</small>
                         </div>
                         <div class="form-control-color">
-                        <label for="color">Color: </label>
-                        <input type="color" name="color" id="color" class="form-control">
+                            <label for="color">Color: </label>
+                            <input type="color" name="color" id="color" class="form-control">
                         </div>
                         <br>
                         <small id="colorHelp" class="form-text text-muted">Please select your favorite color.</small>
                         <br>
                         <br>
                         <div class="form-control-inline">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <input type="reset" class="btn btn-secondary" value="Reset">
-                        <br>
-                        <small id="submitHelp" class="form-text text-muted">Click submit to send your feedback.</small>
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="reset" class="btn btn-secondary" value="Reset">
+                            <br>
+                            <small id="submitHelp" class="form-text text-muted">Click submit to send your
+                                feedback.</small>
                         </div>
                     </form>
                 </div>
@@ -187,4 +210,5 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
