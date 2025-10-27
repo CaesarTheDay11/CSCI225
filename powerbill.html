@@ -1,0 +1,281 @@
+<html>
+
+<head>
+    <title>Power Bill Calculator</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .practice {
+            background-color: #f9f9f9;
+            border: 2px solid #0e0c0c;
+            border-radius: 10%;
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 48%;
+            top: 100px;
+            left: 5%;
+            position: absolute;
+        }
+
+        .result {
+            background-color: #f9f9f9;
+            border: 2px solid #0e0c0c;
+            border-radius: 10%;
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 35%;
+            left: 55%;
+            top: 100px;
+            position: absolute;
+        }
+        tr:nth-child(even) {
+            background: #c3bdbd;
+            padding: 8px;
+        }
+
+        input[type="text"] {
+            width: 100px;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        input[type="button"] {
+            padding: 10px 15px;
+            margin: 5px 0;
+        }
+
+        #billresult {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <h1>Power Bill Calculator</h1>
+    <div class="container">
+        <div class="practice">
+            <h1>Power Bill Calculator</h1>
+            <p>The utility bill calculator is a resource that the Commission is making available to allow a consumer to
+                check the accuracy of their monthly electric bill. A bill calculator has been prepared for customers of
+                the Georgia Power Company. <br>
+                This bill calculator applies only to residential customers who are receiving service under the standard
+                Residential Tariff (R-27). <br>
+                For more details regarding Georgia Power's residential tariff offerings, please visit Georgia Power
+                Pricing & Rates.<br>
+                <br><b>Effective August 2023</b>
+            </p>
+            <p> Input monthly usage in kwh
+                <input type="text" name="monthlyHours" id="monthlyHours">
+            </p>
+            <p> Input days charged for the bill
+                <input type="text" name="daysCharged" id="daysCharged">
+            </p>
+            <p> Are you in the city limits?
+                <input type="radio" name="CityLimits" id="CityLimitsYes" value="yes" checked>
+                <label for="CityLimitsYes">Yes</label>
+                <input type="radio" name="CityLimits" id="CityLimitsNo" value="no">
+                <label for="CityLimitsNo">No</label>
+            </p>
+            <p> Is it Summer or Winter (June to September)?
+                <input type="radio" name="Season" id="Summer" value="summer" checked>
+                <label for="Summer">Summer</label>
+                <input type="radio" name="Season" id="Winter" value="winter">
+                <label for="Winter">Winter</label>
+            </p>
+            <p> enter sales tax (%)
+                <input type="text" name="salesTax" id="salesTax">
+            </p>
+            <p>
+                <input type="button" id="calculateBill" onclick="calculateBill();" value="Calculate Bill">
+            </p>
+            <p>
+                <input type="button" id="Reset" onclick="resetForm()" value="Reset">
+            </p>
+        </div>
+        <div class="result">
+            <p id="billresult">
+            <table>
+                <tr>
+                    <th colspan="2">Details of your bill</th>
+                </tr>
+                <tr>
+                    <td>Items</td>
+                    <td>Fees</td>
+                </tr>
+                <tr>
+                    <td>Base Charge:</td>
+                    <td id="baseCharge"></td>
+                </tr>
+                <tr>
+                    <td>Tier 1 Component (kWh):</td>
+                    <td id="tier1Component"></td>
+                </tr>
+                <tr>
+                    <td>Tier 2 Component (kWh):</td>
+                    <td id="tier2Component"></td>
+                </tr>
+                <tr>
+                    <td>Tier 3 Component (kWh):</td>
+                    <td id="tier3Component"></td>
+                </tr>
+                <tr>
+                    <td>Base Revenue -- Base Bill Subtotal:</td>
+                    <td id="baseRevenueSubtotal"></td>
+                </tr>
+                <tr>
+                    <td>Fuel Cost Rider:</td>
+                    <td id="fuelCostRider"></td>
+                </tr>
+                <tr>
+                    <td>Demand Side Management Residential Rider:</td>
+                    <td id="demandResidentialRider"></td>
+                </tr>
+                <tr>
+                    <td>Nuclear Construction Cost Recovery Rider:</td>
+                    <td id="nuclearConstructionCostRecoveryRider"></td>
+                </tr>
+                <tr>
+                    <td>Environmental Compliance Cost Recovery Rider:</td>
+                    <td id="environmentalComplianceCostRecoveryRider"></td>
+                </tr>
+                <tr>
+                    <td>Total Revenue -- Current Service Subtotal:</td>
+                    <td id="totalRevenueCurrentServiceSubtotal"></td>
+                </tr>
+                <tr>
+                    <td>Franchise Fee:</td>
+                    <td id="franchiseFee"></td>
+                </tr>
+                <tr>
+                    <td>Sales Tax:</td>
+                    <td id="salesTax"></td>
+                </tr>
+                <tr>
+                    <td>Total (excluding tax):</td>
+                    <td id="totalExcludingTax"></td>
+                </tr>
+                <tr>
+                    <td>TOTAL with tax:</td>
+                    <td id="totalWithTax"></td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            function resetForm() {
+                document.getElementById("monthlyHours").value = "";
+                document.getElementById("daysCharged").value = "";
+                document.getElementById("salesTax").value = "";
+                document.getElementById("billresult").innerHTML = "";
+            }
+            function calculateBill() {
+                var monthlyHours, daysCharged, cityLimitsElem, cityLimits, seasonElem, season, salesTax, BaseDaily, baseCost, rate1, rate2, rate3, FuelCostRiderKwh, FranchiseFee, tier1Component, tier2Component, tier3Component, baseRevenue, DemandResidentialRider, NuclearConstructionRecoveryRider, EnvironmentalComplianceCostRecoveryRider, TotalRevenue, Total, taxAmount, totalBill;
+                monthlyHours = parseFloat(document.getElementById("monthlyHours").value);
+                daysCharged = parseFloat(document.getElementById("daysCharged").value);
+                cityLimitsElem = document.querySelector('input[name="CityLimits"]:checked');
+                cityLimits = cityLimitsElem.value;
+                seasonElem = document.querySelector('input[name="Season"]:checked');
+                season = seasonElem.value;
+                salesTax = parseFloat(document.getElementById("salesTax").value) / 100;
+                
+                if (isNaN(monthlyHours) || monthlyHours <= 0) {
+                    alert("Please enter a valid monthly usage (kWh) greater than 0");
+                    return;
+                }
+                if (isNaN(daysCharged) || daysCharged <= 0) {
+                    alert("Please enter a valid number of billing days (1-31)");
+                    return;
+                }
+                if (isNaN(salesTax) || salesTax < 0) {
+                    salesTax = 0;
+                }
+                
+                cityLimits = cityLimitsElem.value;
+                season = seasonElem.value;
+                BaseDaily = 0.4603;
+                baseCost = BaseDaily * daysCharged;
+                console.log("Base Cost: " + baseCost);
+
+                if (season === "summer") {
+                    rate1 = 0.066678;
+                    rate2 = 0.110748;
+                    rate3 = 0.114625;
+                    FuelCostRiderKwh = 0.045876
+                }
+                else if (season === "winter") {
+                    rate1 = 0.062404;
+                    rate2 = 0.062404;
+                    rate3 = 0.062404;
+                    FuelCostRiderKwh = 0.042859;
+
+                }
+                if (cityLimits === "yes") {
+                    FranchiseFee = 3.0674;
+                }
+                else if (cityLimits === "no") {
+                    FranchiseFee = 1.1839;
+                }
+                if (monthlyHours <= 650) {
+                    tier1Component = monthlyHours * rate1;
+                    tier2Component = 0;
+                    tier3Component = 0;
+                    baseRevenue = baseCost + tier1Component;
+                } else if (monthlyHours > 650 && monthlyHours <= 1000) {
+                    tier1Component = 650 * rate1;
+                    tier2Component = (monthlyHours - 650) * rate2;
+                    tier3Component = 0;
+                    baseRevenue = baseCost + tier1Component + tier2Component;
+                } else if (monthlyHours > 1000) {
+                    tier1Component = 650 * rate1;
+                    tier2Component = 350 * rate2;
+                    tier3Component = (monthlyHours - 1000) * rate3;
+                    baseRevenue = baseCost + tier1Component + tier2Component + tier3Component;
+                }
+
+                DemandResidentialRider = baseRevenue * 1.5989 / 100;
+
+                NuclearConstructionRecoveryRider = baseRevenue * 4.1562 / 100;
+
+                EnvironmentalComplianceCostRecoveryRider = baseRevenue * 16.2813 / 100;
+
+                FuelCostRiderKwh = FuelCostRiderKwh * monthlyHours;
+
+
+                TotalRevenue = baseRevenue + FuelCostRiderKwh + DemandResidentialRider + NuclearConstructionRecoveryRider + EnvironmentalComplianceCostRecoveryRider;
+                FranchiseFee = TotalRevenue * FranchiseFee / 100;
+                Total = TotalRevenue + FranchiseFee;
+                taxAmount = Total * salesTax;
+
+                totalBill = Total + taxAmount;
+                if (totalBill > 500) {
+                    window.open("https://www.georgiapower.com/residential/save-money-and-energy/products-programs.html");
+                }
+                printResult(totalBill, baseCost, tier1Component, tier2Component, tier3Component, baseRevenue, FuelCostRiderKwh, DemandResidentialRider, NuclearConstructionRecoveryRider, EnvironmentalComplianceCostRecoveryRider, salesTax, TotalRevenue, FranchiseFee, Total);
+            }
+            function printResult(totalBill, baseCost, tier1Component, tier2Component, tier3Component, baseRevenue, FuelCostRiderKwh, DemandResidentialRider, NuclearConstructionRecoveryRider, EnvironmentalComplianceCostRecoveryRider, salesTax,  TotalRevenue, FranchiseFee, Total) {
+                document.getElementById("baseCharge").innerHTML = "$" + baseCost.toFixed(2);
+                document.getElementById("tier1Component").innerHTML = "$" + tier1Component.toFixed(2);
+                document.getElementById("tier2Component").innerHTML = "$" + tier2Component.toFixed(2);
+                document.getElementById("tier3Component").innerHTML = "$" + tier3Component.toFixed(2);
+                document.getElementById("baseRevenueSubtotal").innerHTML = "$" + baseRevenue.toFixed(2);
+                document.getElementById("fuelCostRider").innerHTML = "$" + FuelCostRiderKwh.toFixed(2);
+                document.getElementById("demandResidentialRider").innerHTML = "$" + DemandResidentialRider.toFixed(2);
+                document.getElementById("nuclearConstructionCostRecoveryRider").innerHTML = "$" + NuclearConstructionRecoveryRider.toFixed(2);
+                document.getElementById("environmentalComplianceCostRecoveryRider").innerHTML = "$" + EnvironmentalComplianceCostRecoveryRider.toFixed(2);
+                document.getElementById("totalRevenueCurrentServiceSubtotal").innerHTML = "$" + TotalRevenue.toFixed(2);
+                document.getElementById("salesTax").innerHTML = "$" + salesTax.toFixed(2);
+                document.getElementById("franchiseFee").innerHTML = "$" + FranchiseFee.toFixed(2);
+                document.getElementById("totalExcludingTax").innerHTML = "$" + Total.toFixed(2);
+                document.getElementById("totalWithTax").innerHTML = "$" + totalBill.toFixed(2);
+            }
+        </script>
+    </div>
+</div>
+</body>
+
+</html>
